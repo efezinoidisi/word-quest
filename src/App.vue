@@ -2,53 +2,60 @@
   <header>
     <h1 class="">wordle game clone</h1>
   </header>
-
   <main>
-    <div>
-      <WordDisplay v-for="word in guesses" :key="word" :word="word" :size="5" />
+    <div class="grid gap-2 place-items-center">
+      <WordDisplay
+        v-for="(word, index) in guesses"
+        :key="`${word}-${index}`"
+        :word="word"
+        :size="5"
+        :index="index"
+      />
     </div>
+    <KeyBoard :handleSubmit="handleSubmit" />
 
-    <button
-      class="bg-purple-700 text-white px-4 py-2 capitalize rounded my-4 disabled:bg-slate-100 disabled:text-black"
-      :disabled="isDisabled"
-      @click="submitGuess"
-    >
-      submit
-    </button>
-    <KeyBoard />
+    <Modal :showCancel="false" :onConfirm="resetGame" confirmText="new game" ref="modal">
+      <div v-html="modalHtml" class="p-3"></div>
+    </Modal>
   </main>
 </template>
 
 <script setup lang="ts">
+import Modal from '@/components/ModalWrapper.vue'
 import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 import KeyBoard from './components/KeyBoard.vue'
 import WordDisplay from './components/WordDisplay.vue'
 import { useGameStore } from './stores/game'
 
 const store = useGameStore()
 
-const { submitGuess } = store
-const { guesses, isDisabled } = storeToRefs(store)
+const modal = ref<InstanceType<typeof Modal>>()
 
-// const keyboardClass = 'keyboard'
+const { submitGuess, resetGame } = store
+const { guesses, isDisabled, guessWord } = storeToRefs(store)
+const modalHtml = ref('<p>test</p>')
 
-// const handleChange = (data: string | Event) => {
-//   if (data instanceof Event) {
-//     const { value } = data.target as HTMLInputElement
-//     input.value = value
+const showModal = () => modal.value?.showModal()
 
-//     return
-//   }
+function handleSubmit() {
+  // only submit when up to five characters
+  if (isDisabled.value) return
 
-//   input.value = data
-// }
+  const { isWinner, gameEnd } = submitGuess()
 
-// const handleKeypress = (key: string) => {
-//   if (key === 'Backspace') {
-//input.value.slice(0,-1)
-//   } else {
-//     // input.value += key
-//   }
-// }
+  if (isWinner) {
+    modalHtml.value = '<h3 class="text-3xl">Congratulations!</h3>'
+    showModal()
+  }
+
+  if (!isWinner && gameEnd) {
+    modalHtml.value = `
+    <h3 class="text-3xl mb-3">Level Failed</h3>
+    <p>The correct word is <strong class="text-purple-500 text-xl">${guessWord.value}</strong></p>
+    `
+    showModal()
+  }
+}
 </script>
 <style scoped></style>

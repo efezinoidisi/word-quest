@@ -1,6 +1,10 @@
 <template>
-  <div class="grid gap-3 border place-items-center w-fit mx-auto my-7 p-2">
-    <div v-for="(row, index) in keys" :key="`row-${index}`" class="flex gap-3">
+  <div class="grid gap-3 border place-items-center w-fit mx-auto my-7 py-4 px-2 md:px-4 rounded-sm">
+    <div
+      v-for="(row, index) in keys"
+      :key="`row-${index}`"
+      class="flex gap-3 flex-wrap w-full justify-center md:justify-start md:flex-nowrap"
+    >
       <KeyboardKey
         v-for="key in row"
         :key="key.label"
@@ -16,6 +20,11 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useGameStore } from '../stores/game'
 import KeyboardKey from './KeyboardKey.vue'
+import { storeToRefs } from 'pinia';
+
+const { handleSubmit} = defineProps<{
+  handleSubmit: () => void
+}>()
 
 const keys = ref([
   [
@@ -144,24 +153,29 @@ const keys = ref([
 
 const store = useGameStore()
 
+const {isGameEnd} = storeToRefs(store)
+
 const { handleChange, handleBackspace } = store
 
 const validKeys = keys.value.flatMap((row) => row.map((key) => key.label))
 
 const handleKeypress = (key: string) => {
+  
+  if(isGameEnd.value) return;
   if (key === 'Backspace') {
     handleBackspace()
     return
   }
 
   if (key === 'Enter') {
-    // handle submit
+    handleSubmit()
     return
   }
   handleChange(key)
 }
 
 function keydownListener(event: KeyboardEvent) {
+  event.preventDefault()
   const key = event.key
 
   if (!validKeys.includes(key)) return

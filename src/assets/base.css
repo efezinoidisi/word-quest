@@ -88,3 +88,48 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.modal {
+  top: 20%;
+  left: 50%;
+  width: 70%;
+  max-width: 26rem;
+  translate: -50% 0;
+  border: none;
+  border-radius: 10px;
+}
+
+dialog {
+  --opacity: 0;
+
+  scale: 0.5;
+
+  &,
+  &::backdrop {
+    opacity: var(--opacity);
+    transition: all 0.7s ease-in-out allow-discrete;
+  }
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+
+  &:where([open]) {
+    --opacity: 1;
+    scale: 1;
+  }
+}
+
+/* not supported in firefox yet */
+@starting-style {
+  dialog:where([open]) {
+    --opacity: 0;
+    scale: 0.5;
+  }
+
+  dialog:where([open])::backdrop {
+    --opacity: 0;
+  }
+}

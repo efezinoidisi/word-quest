@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "pinia": "^2.1.7",
-    "simple-keyboard": "^3.7.87",
     "vue": "^3.4.29"
   },
   "devDependencies": {

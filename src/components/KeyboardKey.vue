@@ -1,7 +1,7 @@
 <template>
   <button
     type="button"
-    :class="isDisabled ? 'bg-slate-500 pointer-events-none' : ''"
+    :class="backgroundColor"
     @click="handleClick"
     class="bg-white py-2 px-4 capitalize text-black"
   >
@@ -10,17 +10,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { useGameStore } from '@/stores/game'
+import { getBackgroundColor } from '@/utils/utils'
+import { storeToRefs } from 'pinia'
+import { ref, watch } from 'vue'
 
-const { keyLabel, isDisabled } = defineProps<{
+const store = useGameStore()
+
+const { validationResults } = storeToRefs(store)
+
+const { keyLabel } = defineProps<{
   keyLabel: string
   isDisabled: boolean
 }>()
-
-const keyClass = computed(() => ({
-  disabled: isDisabled,
-  regular: !isDisabled
-}))
 
 const emit = defineEmits<{
   (event: 'keyPress', key: string): void
@@ -29,4 +31,18 @@ const emit = defineEmits<{
 const handleClick = () => {
   emit('keyPress', keyLabel)
 }
+
+const backgroundColor = ref('')
+
+watch(
+  validationResults.value,
+  () => {
+    const key = validationResults.value.flat(2).find((item) => item.letter === keyLabel)
+
+    backgroundColor.value = key ? getBackgroundColor(key.status) : ''
+  },
+  {
+    immediate: true
+  }
+)
 </script>
