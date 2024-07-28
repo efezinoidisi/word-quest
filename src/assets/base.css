@@ -3,54 +3,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
+  --color-background: 243 244 245;
+  --color-foreground: 16 12 8;
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
+  --color-border: 255 148 8;
+  --color-border-hover: 149 18 44;
 
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
+  --color-heading: 202 63 22;
+  --color-secondary: 219 224 225;
 
-  --section-gap: 160px;
+  --section-gap: 10rem;
+
+  --modal-background: 235 236 240;
+  --modal-text: 11 23 61;
+}
+
+.dark {
+  --color-background: 20 32 48;
+  --color-foreground: 243 244 245;
+
+  --modal-background: 11 23 60;
+  --modal-text: 205 214 238;
+}
+
+.light {
+  --color-background: 243 244 245;
+  --color-foreground: 16 12 8;
+
+  --modal-background: 235 236 240;
+  --modal-text: 11 23 61;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
+    --color-background: 20 32 48;
+    --color-foreground: 243 244 245;
 
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
+    --modal-background: 11 23 61;
+    --modal-text: 205 214 238;
   }
 }
 
@@ -64,8 +57,8 @@
 
 body {
   min-height: 100vh;
-  color: #fff /*var(--color-text)*/;
-  background: var(--color-background);
+  /* color: var(--color-foreground);
+  background: var(--color-background); */
   transition:
     color 0.5s,
     background-color 0.5s;
@@ -83,10 +76,11 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
+  font-size: 1rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 .modal {
@@ -97,6 +91,8 @@ body {
   translate: -50% 0;
   border: none;
   border-radius: 10px;
+  background-color: rgb(var(--modal-background));
+  color: rgb(var(--modal-text));
 }
 
 dialog {

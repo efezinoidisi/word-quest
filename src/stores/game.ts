@@ -9,13 +9,15 @@ export const useGameStore = defineStore('input', () => {
 
   const guesses = ref<Array<string>>([...initialGuess])
 
-  const validationResults = ref(initValidation())
+  const validationResults = ref([...initValidation()])
 
   const wordList = ref<Array<string>>([])
 
   const guessWord = ref('')
 
   const isGameEnd = ref(false)
+
+  const isHardMode = ref(false)
 
   // length of word to be guessed;
   const wordLength = computed(() => guessWord.value.length)
@@ -103,7 +105,7 @@ export const useGameStore = defineStore('input', () => {
   function resetGame() {
     guesses.value = [...initialGuess]
 
-    validationResults.value = initValidation()
+    validationResults.value = [...initValidation()]
 
     guessWord.value = getRandomWord(wordList.value)
 
@@ -122,6 +124,7 @@ export const useGameStore = defineStore('input', () => {
     isDisabled,
     validationResults,
     guessWord,
-    isGameEnd
+    isGameEnd,
+    isHardMode
   }
 })

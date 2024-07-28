@@ -2,7 +2,8 @@ export function getBackgroundColor(status: number | null) {
   if (status === null) return 'bg-inherit'
   if (status === 0) {
     return 'bg-green-600'
-  } else if (status === 1) {
+  }
+  if (status === 1) {
     return 'bg-yellow-500'
   }
 

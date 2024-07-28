@@ -1,26 +1,28 @@
 <template>
   <dialog ref="modal" class="modal" :class="classes" @click="handleDialogClick">
-    <slot />
+    <div class="p-5 w-full h-full space-y-5">
+      <slot />
 
-    <footer class="w-full flex justify-end p-3" v-if="showCancel || showConfirm">
-      <button
-        type="button"
-        v-if="showCancel"
-        @click="closeModal"
-        class="capitalize border border-purple-500 px-5 py-2 rounded-md text-purple-500"
-      >
-        {{ cancelText }}
-      </button>
+      <footer class="w-full flex justify-end p-3" v-if="showCancel || showConfirm">
+        <button
+          type="button"
+          v-if="showCancel"
+          @click="closeModal"
+          class="capitalize border border-purple-500 px-5 py-2 rounded-md text-purple-500"
+        >
+          {{ cancelText }}
+        </button>
 
-      <button
-        type="button"
-        v-if="showConfirm"
-        @click.prevent="confirm"
-        class="capitalize bg-purple-500 px-5 py-2 rounded-md text-white"
-      >
-        {{ confirmText }}
-      </button>
-    </footer>
+        <button
+          type="button"
+          v-if="showConfirm"
+          @click.prevent="confirm"
+          class="capitalize bg-purple-500 px-5 py-2 rounded-md text-white"
+        >
+          {{ confirmText }}
+        </button>
+      </footer>
+    </div>
   </dialog>
 </template>
 

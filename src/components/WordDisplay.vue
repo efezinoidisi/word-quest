@@ -3,7 +3,7 @@
     <p
       v-for="(letter, letterIndex) in displayedWord"
       :key="letter"
-      class="border border-slate-400 py-2 px-4 rounded-md capitalize md:min-w-12 md:min-h-12 min-w-7 min-h-7"
+      class="border border-slate-400 py-2 px-4 rounded-md capitalize min-w-12 min-h-12 text-xl flex justify-center items-center"
       :class="
         validationResults[index][letterIndex].letter
           ? getBackgroundColor(validationResults[index][letterIndex].status)

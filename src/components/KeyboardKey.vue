@@ -3,7 +3,7 @@
     type="button"
     :class="backgroundColor"
     @click="handleClick"
-    class="bg-white py-2 px-4 capitalize text-black"
+    class="py-2 px-1 text-lg md:px-4 capitalize text-black"
   >
     {{ keyLabel }}
   </button>
@@ -13,7 +13,7 @@
 import { useGameStore } from '@/stores/game'
 import { getBackgroundColor } from '@/utils/utils'
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
+import { computed } from 'vue'
 
 const store = useGameStore()
 
@@ -32,17 +32,9 @@ const handleClick = () => {
   emit('keyPress', keyLabel)
 }
 
-const backgroundColor = ref('')
+const backgroundColor = computed(() => {
+  const key = validationResults.value.flat(2).find((item) => item.letter === keyLabel)
 
-watch(
-  validationResults.value,
-  () => {
-    const key = validationResults.value.flat(2).find((item) => item.letter === keyLabel)
-
-    backgroundColor.value = key ? getBackgroundColor(key.status) : ''
-  },
-  {
-    immediate: true
-  }
-)
+  return key ? getBackgroundColor(key.status) : 'bg-white'
+})
 </script>
