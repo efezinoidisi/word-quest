@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="min-h-svh py-5">
     <div class="grid gap-2 place-items-center">
       <WordDisplay
         v-for="(word, index) in guesses"
@@ -11,7 +11,13 @@
     </div>
     <KeyBoard :handleSubmit="handleSubmit" />
 
-    <Modal :showCancel="false" :onConfirm="resetGame" confirmText="new game" ref="modal">
+    <Modal
+      :showCancel="false"
+      :onConfirm="resetGame"
+      confirmText="play next"
+      ref="modal"
+      :allowClickOutside="false"
+    >
       <div v-html="modalHtml" class="p-3"></div>
     </Modal>
   </main>
@@ -42,7 +48,7 @@ function handleSubmit() {
   const { isWinner, gameEnd } = submitGuess()
 
   if (isWinner) {
-    modalHtml.value = '<h3 class="text-3xl">Congratulations!</h3>'
+    modalHtml.value = '<h3 class="text-3xl">Yeah, You did it!</h3>'
     showModal()
   }
 

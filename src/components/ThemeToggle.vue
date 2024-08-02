@@ -4,11 +4,11 @@
       v-for="{ name, icon } in themes"
       :key="name"
       @click="toggleTheme(name)"
-      class="flex items-center gap-2 py-2 px-3 rounded-2xl transition-all duration-200 ease-in-out"
+      class="flex items-center gap-2 py-2 px-2 md:px-3 rounded-2xl transition-all duration-200 ease-in-out outline-none focus-visible:outline-foreground"
       :class="theme === name ? 'bg-cb ' : 'border border-cb md:hover:opacity-60'"
     >
-      <i class="pi text-2xl" :class="icon"></i>
-      <span>{{ name }}</span>
+      <i class="pi text-lg" :class="icon"></i>
+      <span class="capitalize text-sm md:text-base">{{ name }}</span>
     </button>
   </div>
 </template>

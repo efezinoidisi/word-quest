@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="grid gap-2 border place-items-center w-fit mx-auto my-7 py-4 px-1 md:px-4 rounded-sm bg-zinc-500"
-  >
+  <div class="grid gap-2 place-items-center w-fit mx-auto my-7 py-4 px-1 md:px-4 rounded-md bg-kbd">
     <div
       v-for="(row, index) in keys"
       :key="`row-${index}`"
@@ -147,7 +145,7 @@ const keys = ref([
       isDisabled: false
     },
     {
-      label: 'Delete',
+      label: 'Del',
       isDisabled: false
     }
   ]
@@ -163,7 +161,7 @@ const validKeys = keys.value.flatMap((row) => row.map((key) => key.label))
 validKeys.push('Backspace')
 const handleKeypress = (key: string) => {
   if (isGameEnd.value) return
-  if (key === 'Backspace' || key === 'Delete') {
+  if (key === 'Backspace' || key === 'Del') {
     handleBackspace()
     return
   }
@@ -172,6 +170,7 @@ const handleKeypress = (key: string) => {
     handleSubmit()
     return
   }
+
   handleChange(key)
 }
 

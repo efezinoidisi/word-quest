@@ -1,8 +1,26 @@
 import { getRandomWord, initValidation } from '@/utils/utils'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { toast } from 'vue3-toastify'
 
 const initialGuess = Array(6).fill('')
+
+const position: { [key: number]: string } = {
+  0: 'first',
+  1: 'second',
+  2: 'third',
+  3: 'fourth',
+  4: 'fifth'
+}
+
+const gameStatistics = {
+  currentStreak: 0,
+  maxStreak: 0,
+  gamesPlayed: 0,
+  gamesWon: 0,
+  guesses: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0 },
+  hasPlayed: false
+}
 
 export const useGameStore = defineStore('input', () => {
   const activeIndex = ref(0)
@@ -61,6 +79,38 @@ export const useGameStore = defineStore('input', () => {
   }
 
   function submitGuess(): { gameEnd: boolean; isWinner: boolean } {
+    const guess = guesses.value[activeIndex.value]
+    if (!wordList.value.includes(guess)) {
+      toast.info(`not in word list`)
+
+      return {
+        gameEnd: false,
+        isWinner: false
+      }
+    }
+
+    if (isHardMode.value && activeIndex.value !== 0) {
+      const result = validationResults.value[activeIndex.value - 1]
+
+      for (let i = 0; i < wordLength.value; i++) {
+        if (result[i].status === 0 && guess[i] !== result[i].letter) {
+          toast.info(`The ${position[i]} letter must be ${result[i].letter.toUpperCase()}`)
+
+          return {
+            gameEnd: false,
+            isWinner: false
+          }
+        }
+        if (result[i].status === 1 && !guess.includes(result[i].letter)) {
+          toast.info(`word must include ${result[i].letter.toUpperCase()}`)
+
+          return {
+            gameEnd: false,
+            isWinner: false
+          }
+        }
+      }
+    }
     // validate guess
     const isValid = validateGuess()
     if (isValid) {

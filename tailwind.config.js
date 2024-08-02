@@ -16,7 +16,8 @@ export default {
 
         'modal-bg': 'rgba(var(--modal-background))',
 
-        'modal-text': 'rgba(var(--modal-text))'
+        'modal-text': 'rgba(var(--modal-text))',
+        kbd: 'var(--color-kbd)'
       }
     }
   },

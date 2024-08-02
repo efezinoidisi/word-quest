@@ -2,7 +2,13 @@
   <main class="w-11/12 mx-auto py-7">
     <section class="grid place-items-center mb-14">
       <h1 class="text-2xl">WordQuest</h1>
-      <img :src="imgUrl" alt="word" class="w-full md:max-w-screen-sm rounded-xl block my-6" />
+      <img
+        :src="imgUrl"
+        alt="word"
+        class="w-full md:max-w-screen-sm rounded-xl block my-6 bg-[#f7f7f7]"
+        width="200"
+        height="200"
+      />
       <h2 class="text-5xl mb-8 font-bold leading-snug text-center text-balance max-w-2xl">
         Get 6 chances to guess a 5-letter word
       </h2>
@@ -14,7 +20,7 @@
       >
     </section>
 
-    <section class="space-y-10 grid place-items-center">
+    <section class="space-y-10 grid place-items-center" id="how-to-play">
       <h2 class="text-3xl capitalize font-semibold">how to play</h2>
       <p class="text-xl">Guess the Wordle in 6 tries</p>
 
@@ -22,7 +28,9 @@
         <li>Each guess must be a valid 5-letter word.</li>
         <li>The color of the tiles will change to show how close your guess was to the word.</li>
       </ul>
+    </section>
 
+    <section class="mt-7">
       <h3>Examples</h3>
 
       <div class="mt-10 space-y-5">

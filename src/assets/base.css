@@ -1,4 +1,5 @@
 /* color palette from <https://github.com/vuejs/theme> */
+@import 'vue3-toastify/dist/index.css';
 
 @tailwind base;
 @tailwind components;
@@ -19,6 +20,8 @@
 
   --modal-background: 235 236 240;
   --modal-text: 11 23 61;
+
+  --color-kbd: #dfe2e4;
 }
 
 .dark {
@@ -27,6 +30,7 @@
 
   --modal-background: 11 23 60;
   --modal-text: 205 214 238;
+  --color-kbd: #193950;
 }
 
 .light {
@@ -35,6 +39,7 @@
 
   --modal-background: 235 236 240;
   --modal-text: 11 23 61;
+  --color-kbd: #dfe2e4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,6 +49,8 @@
 
     --modal-background: 11 23 61;
     --modal-text: 205 214 238;
+
+    --color-kbd: #193950;
   }
 }
 
@@ -56,9 +63,8 @@
 }
 
 body {
-  min-height: 100vh;
-  /* color: var(--color-foreground);
-  background: var(--color-background); */
+  color: var(--color-foreground);
+  background-color: var(--color-background);
   transition:
     color 0.5s,
     background-color 0.5s;
@@ -81,12 +87,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
+  min-height: 100svh;
 }
 
 .modal {
   top: 20%;
   left: 50%;
-  width: 70%;
+  width: 90%;
   max-width: 26rem;
   translate: -50% 0;
   border: none;
@@ -127,5 +134,11 @@ dialog {
 
   dialog:where([open])::backdrop {
     --opacity: 0;
+  }
+}
+
+@media (min-width: 47.8125rem) {
+  .modal {
+    width: 70%;
   }
 }

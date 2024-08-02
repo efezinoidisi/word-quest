@@ -1,6 +1,6 @@
 <template>
   <dialog ref="modal" class="modal" :class="classes" @click="handleDialogClick">
-    <div class="p-5 w-full h-full space-y-5">
+    <div class="px-5 w-full h-full space-y-5 pb-5">
       <slot />
 
       <footer class="w-full flex justify-end p-3" v-if="showCancel || showConfirm">
@@ -31,21 +31,24 @@ import { ref } from 'vue'
 
 const modal = ref<HTMLDialogElement>()
 
-const { confirmText, cancelText, showConfirm, showCancel, classes } = withDefaults(
-  defineProps<{
-    confirmText?: string
-    cancelText?: string
-    showConfirm?: boolean
-    showCancel?: boolean
-    classes?: string
-  }>(),
-  {
-    cancelText: 'Cancel',
-    confirmText: 'Confirm',
-    showCancel: true,
-    showConfirm: true
-  }
-)
+const { confirmText, cancelText, showConfirm, showCancel, classes, allowClickOutside } =
+  withDefaults(
+    defineProps<{
+      confirmText?: string
+      cancelText?: string
+      showConfirm?: boolean
+      showCancel?: boolean
+      classes?: string
+      allowClickOutside?: boolean
+    }>(),
+    {
+      cancelText: 'Cancel',
+      confirmText: 'Confirm',
+      showCancel: true,
+      showConfirm: true,
+      allowClickOutside :true
+    }
+  )
 
 const emit = defineEmits(['confirm', 'cancel'])
 
@@ -75,6 +78,8 @@ defineExpose({
 // close modal on click outside
 function handleDialogClick(event: MouseEvent) {
   const target = event.target as HTMLDialogElement
+
+  if (!allowClickOutside) return
 
   if (target && target.classList.contains('modal')) {
     closeModal()

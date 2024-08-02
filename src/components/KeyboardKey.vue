@@ -3,7 +3,7 @@
     type="button"
     :class="backgroundColor"
     @click="handleClick"
-    class="py-2 px-1 text-lg md:px-4 capitalize text-black"
+    class="py-1 px-1 min-w-6 sm:min-w-7 md:min-w-10 sm:px-2 text-lg md:px-4 capitalize text-black rounded"
   >
     {{ keyLabel }}
   </button>

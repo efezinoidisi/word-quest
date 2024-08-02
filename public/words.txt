@@ -221,3 +221,17 @@ train
 bread
 homes
 teeth
+cloud
+greet
+treat
+sweat
+swear
+altar
+alter
+flood
+mould
+clock
+slack
+slope
+slurp
+tough
