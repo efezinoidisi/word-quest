@@ -54,15 +54,7 @@
   }
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
-}
-
-body {
+/* body {
   color: var(--color-foreground);
   background-color: var(--color-background);
   transition:
@@ -88,7 +80,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   min-height: 100svh;
-}
+} */
 
 .modal {
   top: 20%;

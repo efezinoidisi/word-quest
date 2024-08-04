@@ -18,6 +18,16 @@ export default {
 
         'modal-text': 'rgba(var(--modal-text))',
         kbd: 'var(--color-kbd)'
+      },
+      gap: {
+        section: 'var(--section-gap)'
+      },
+      spacing: {
+        section: 'var(--section-gap)'
+      },
+      backgroundImage: {
+        art: 'url("/src/assets/bg.jpg")',
+        galaxy: 'url("/src/assets/galaxy.jpg")'
       }
     }
   },

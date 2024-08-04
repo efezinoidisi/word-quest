@@ -113,7 +113,7 @@ const keys = ref([
   ],
   [
     {
-      label: 'Enter',
+      label: 'enter',
       isDisabled: true
     },
     {
@@ -145,7 +145,7 @@ const keys = ref([
       isDisabled: false
     },
     {
-      label: 'Del',
+      label: 'del',
       isDisabled: false
     }
   ]
@@ -158,15 +158,15 @@ const { isGameEnd } = storeToRefs(store)
 const { handleChange, handleBackspace } = store
 
 const validKeys = keys.value.flatMap((row) => row.map((key) => key.label))
-validKeys.push('Backspace')
+validKeys.push('backspace')
 const handleKeypress = (key: string) => {
   if (isGameEnd.value) return
-  if (key === 'Backspace' || key === 'Del') {
+  if (key === 'backspace' || key === 'del') {
     handleBackspace()
     return
   }
 
-  if (key === 'Enter') {
+  if (key === 'enter') {
     handleSubmit()
     return
   }
@@ -176,7 +176,7 @@ const handleKeypress = (key: string) => {
 
 function keydownListener(event: KeyboardEvent) {
   event.preventDefault()
-  const key = event.key
+  const key = event.key.toLowerCase()
 
   if (!validKeys.includes(key)) return
   handleKeypress(key)

@@ -5,7 +5,7 @@
       <img
         :src="imgUrl"
         alt="word"
-        class="w-full md:max-w-screen-sm rounded-xl block my-6 bg-[#f7f7f7]"
+        class="w-full md:max-w-md rounded-xl block my-6 bg-[#f7f7f7]"
         width="200"
         height="200"
       />
@@ -20,18 +20,21 @@
       >
     </section>
 
-    <section class="space-y-10 grid place-items-center" id="how-to-play">
+    <section class="space-y-10 max-w-md mx-auto pt-20" id="how-to-play">
       <h2 class="text-3xl capitalize font-semibold">how to play</h2>
       <p class="text-xl">Guess the Wordle in 6 tries</p>
 
       <ul class="list-disc list-inside space-y-4 text-xl">
-        <li>Each guess must be a valid 5-letter word.</li>
+        <li>
+          Each guess must be a valid 5-letter word (currently limited to a fixed word list so not
+          all five letter words in the english language).
+        </li>
         <li>The color of the tiles will change to show how close your guess was to the word.</li>
       </ul>
     </section>
 
-    <section class="mt-7">
-      <h3>Examples</h3>
+    <section class="mt-10 max-w-md mx-auto">
+      <h3 class="text-2xl font-medium">Examples</h3>
 
       <div class="mt-10 space-y-5">
         <p class="uppercase space-x-3 mb-3 text-lg">

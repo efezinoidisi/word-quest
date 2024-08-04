@@ -1,5 +1,5 @@
 <template>
-  <main class="min-h-svh py-5">
+  <main class="min-h-svh py-5 bg-galaxy">
     <div class="grid gap-2 place-items-center">
       <WordDisplay
         v-for="(word, index) in guesses"
@@ -29,14 +29,14 @@ import Modal from '@/components/ModalWrapper.vue'
 import WordDisplay from '@/components/WordDisplay.vue'
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const store = useGameStore()
 
 const modal = ref<InstanceType<typeof Modal>>()
 
 const { submitGuess, resetGame } = store
-const { guesses, isDisabled, guessWord } = storeToRefs(store)
+const { guesses, isDisabled, guessWord, statistics } = storeToRefs(store)
 const modalHtml = ref('<p>test</p>')
 
 const showModal = () => modal.value?.showModal()
@@ -60,5 +60,11 @@ function handleSubmit() {
     showModal()
   }
 }
+
+watch(statistics.value, () => {
+  console.log(statistics.value)
+
+  localStorage.setItem('word-quest-game', JSON.stringify(statistics.value))
+})
 </script>
 <style scoped></style>

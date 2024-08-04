@@ -1,3 +1,4 @@
+import type { Game } from '@/types/game'
 import { getRandomWord, initValidation } from '@/utils/utils'
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
@@ -13,7 +14,7 @@ const position: { [key: number]: string } = {
   4: 'fifth'
 }
 
-const gameStatistics = {
+const initialStatistics = {
   currentStreak: 0,
   maxStreak: 0,
   gamesPlayed: 0,
@@ -22,7 +23,13 @@ const gameStatistics = {
   hasPlayed: false
 }
 
-export const useGameStore = defineStore('input', () => {
+const storageKey = 'word-quest-game'
+
+const localData = localStorage.getItem(storageKey)
+
+const defaultGameSettings: Game = localData ? JSON.parse(localData) : initialStatistics
+
+export const useGameStore = defineStore('game', () => {
   const activeIndex = ref(0)
 
   const guesses = ref<Array<string>>([...initialGuess])
@@ -34,6 +41,8 @@ export const useGameStore = defineStore('input', () => {
   const guessWord = ref('')
 
   const isGameEnd = ref(false)
+
+  const statistics = ref(defaultGameSettings)
 
   const isHardMode = ref(false)
 
@@ -78,6 +87,29 @@ export const useGameStore = defineStore('input', () => {
     return false
   }
 
+  function updateStatistics(isWinner: boolean) {
+    if (isWinner) {
+      statistics.value.currentStreak += 1
+      statistics.value.gamesWon += 1
+    }
+
+    if (!statistics.value.hasPlayed) {
+      statistics.value.hasPlayed = true
+    }
+
+    if (!isWinner) {
+      statistics.value.currentStreak = 0
+    }
+
+    statistics.value.maxStreak = Math.max(
+      statistics.value.currentStreak,
+      statistics.value.maxStreak
+    )
+    statistics.value.gamesPlayed += 1
+    const size = guesses.value.filter((guess) => guess).length
+    statistics.value.guesses[size] += 1
+  }
+
   function submitGuess(): { gameEnd: boolean; isWinner: boolean } {
     const guess = guesses.value[activeIndex.value]
     if (!wordList.value.includes(guess)) {
@@ -115,6 +147,8 @@ export const useGameStore = defineStore('input', () => {
     const isValid = validateGuess()
     if (isValid) {
       isGameEnd.value = true
+      updateStatistics(true)
+
       return {
         gameEnd: true,
         isWinner: true
@@ -122,6 +156,8 @@ export const useGameStore = defineStore('input', () => {
     }
     if (!isValid && activeIndex.value === 5) {
       isGameEnd.value = true
+      updateStatistics(false)
+
       return {
         gameEnd: true,
         isWinner: false
@@ -175,6 +211,7 @@ export const useGameStore = defineStore('input', () => {
     validationResults,
     guessWord,
     isGameEnd,
-    isHardMode
+    isHardMode,
+    statistics
   }
 })

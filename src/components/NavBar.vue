@@ -4,7 +4,9 @@
       <RouterLink to="/">WQ</RouterLink>
     </p>
     <nav class="flex items-center gap-3">
-      <button class="capitalize" @click="resetGame">new game</button>
+      <RouterLink to="/#how-to-play">how to play</RouterLink>
+      <RouterLink to="/stats">stats</RouterLink>
+      <button class="capitalize" @click="handleNewGame">new game</button>
       <button @click="showModal"><i class="pi pi-cog text-2xl"></i></button>
     </nav>
   </header>
@@ -32,7 +34,7 @@
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import ModalWrapper from './ModalWrapper.vue'
 import ThemeToggle from './ThemeToggle.vue'
 import ToggleButton from './ToggleButton.vue'
@@ -47,4 +49,14 @@ const store = useGameStore()
 
 const { resetGame } = store
 const { isHardMode } = storeToRefs(store)
+
+const route = useRoute()
+const router = useRouter()
+
+const handleNewGame = () => {
+  if (route.path !== '/game') {
+    router.push('/game')
+  }
+  resetGame()
+}
 </script>
