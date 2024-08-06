@@ -1,5 +1,5 @@
 import type { Theme } from '@/types/theme'
-import { readonly, ref, watch } from 'vue'
+import { readonly, ref } from 'vue'
 
 const storageKey = 'word-quest-theme'
 
@@ -9,12 +9,12 @@ const theme = ref<Theme>(defaultTheme)
 export default function useTheme() {
   const toggleTheme = (newTheme: Theme) => {
     if (newTheme === theme.value) return
+    document.body.classList.remove(theme.value)
     theme.value = newTheme
+    document.body.classList.add(theme.value)
+    localStorage.setItem(storageKey, theme.value)
   }
 
-  watch(theme, () => {
-    localStorage.setItem(storageKey, theme.value)
-  })
   return {
     theme: readonly(theme),
     toggleTheme

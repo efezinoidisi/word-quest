@@ -46,7 +46,7 @@ const { confirmText, cancelText, showConfirm, showCancel, classes, allowClickOut
       confirmText: 'Confirm',
       showCancel: true,
       showConfirm: true,
-      allowClickOutside :true
+      allowClickOutside: true
     }
   )
 

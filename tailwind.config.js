@@ -5,19 +5,21 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'rgba(var(--color-background))',
-        foreground: 'rgba(var(--color-foreground))',
-        cb: 'rgba(var(--color-border))',
+        background: 'rgb(var(--color-background))',
+        foreground: 'rgb(var(--color-foreground))',
+        cb: 'rgb(var(--color-border))',
 
-        cbh: 'rgba(var(--color-border-hover))',
-        heading: 'rgba(var(--color-heading))',
+        cbh: 'rgb(var(--color-border-hover))',
+        heading: 'rgb(var(--color-heading))',
 
-        secondary: 'rgba(var(--color-secondary))',
+        secondary: 'rgb(var(--color-secondary))',
 
-        'modal-bg': 'rgba(var(--modal-background))',
+        'modal-bg': 'rgb(var(--modal-background))',
 
-        'modal-text': 'rgba(var(--modal-text))',
-        kbd: 'var(--color-kbd)'
+        'modal-text': 'rgb(var(--modal-text))',
+        kbd: 'var(--color-kbd)',
+        primary: 'var(--color-primary)',
+        'theme-btn': 'rgb(var(--color-theme-btn-bg))'
       },
       gap: {
         section: 'var(--section-gap)'
@@ -28,6 +30,24 @@ export default {
       backgroundImage: {
         art: 'url("/src/assets/bg.jpg")',
         galaxy: 'url("/src/assets/galaxy.jpg")'
+      },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif']
+      },
+      keyframes: {
+        'slide-in': {
+          from: {
+            translate: '0 -50%',
+            opacity: '0'
+          },
+          to: {
+            translate: '0',
+            opacity: '1'
+          }
+        }
+      },
+      animation: {
+        'slide-in': 'slide-in 900ms cubic-bezier(0.39, 0.575, 0.565, 1)'
       }
     }
   },

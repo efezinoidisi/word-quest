@@ -15,8 +15,8 @@
 
       <RouterLink
         to="/game"
-        class="text-2xl capitalize text-center bg-purple-700 text-white py-3 px-7 rounded-xl"
-        >play</RouterLink
+        class="text-2xl capitalize text-center bg-primary text-white py-3 px-7 rounded-xl min-w-44 block"
+        >start game</RouterLink
       >
     </section>
 

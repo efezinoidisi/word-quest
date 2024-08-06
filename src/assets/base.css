@@ -7,7 +7,7 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: 243 244 245;
+  --color-background: 244 237 228;
   --color-foreground: 16 12 8;
 
   --color-border: 255 148 8;
@@ -16,12 +16,14 @@
   --color-heading: 202 63 22;
   --color-secondary: 219 224 225;
 
+  --color-primary: #fd2282;
   --section-gap: 10rem;
 
   --modal-background: 235 236 240;
   --modal-text: 11 23 61;
 
   --color-kbd: #dfe2e4;
+  --color-theme-btn-bg: 219 224 225;
 }
 
 .dark {
@@ -31,15 +33,17 @@
   --modal-background: 11 23 60;
   --modal-text: 205 214 238;
   --color-kbd: #193950;
+  --color-theme-btn-bg: 31 41 55;
 }
 
 .light {
-  --color-background: 243 244 245;
+  --color-background: 244 237 228;
   --color-foreground: 16 12 8;
 
   --modal-background: 235 236 240;
   --modal-text: 11 23 61;
   --color-kbd: #dfe2e4;
+  --color-theme-btn-bg: 219 224 225;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -51,43 +55,29 @@
     --modal-text: 205 214 238;
 
     --color-kbd: #193950;
+    --color-theme-btn-bg: 31 41 55;
   }
 }
 
-/* body {
-  color: var(--color-foreground);
-  background-color: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
+body {
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-background));
   line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 1rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   min-height: 100svh;
-} */
+  max-width: 90rem;
+  margin-inline: auto;
+}
 
 .modal {
   top: 20%;
-  left: 50%;
   width: 90%;
   max-width: 26rem;
-  translate: -50% 0;
   border: none;
   border-radius: 10px;
   background-color: rgb(var(--modal-background));
@@ -122,6 +112,7 @@ dialog {
   dialog:where([open]) {
     --opacity: 0;
     scale: 0.5;
+    left: 10rem;
   }
 
   dialog:where([open])::backdrop {
@@ -131,6 +122,6 @@ dialog {
 
 @media (min-width: 47.8125rem) {
   .modal {
-    width: 70%;
+    /* width: 70%; */
   }
 }

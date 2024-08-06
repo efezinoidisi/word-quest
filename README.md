@@ -1,35 +1,34 @@
-# wordle_game
+## Word Quest (A wordle clone)
 
-This template should help get you started developing with Vue 3 in Vite.
+This project helped me solidify my understanding of Vue3 and its Composition API.
+
+My goal was to replicate the core gameplay while adding a few features to enhance the experience.
+
+List of five letter words gotten from [stanford](https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt)
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
+
+1. Clone this repository
+
+```sh
+git clone https://github.com/efezinoidisi/word-quest.git
+cd word-quest
+```
+
+2. Install project dependencies
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+3. Compile and Hot-Reload for Development
 
 ```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
@@ -52,10 +51,4 @@ But it's still recommended to test the production build with `test:e2e` before d
 ```sh
 npm run build
 npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```

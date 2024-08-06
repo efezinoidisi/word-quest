@@ -1,6 +1,6 @@
 <template>
-  <main class="min-h-svh py-5 bg-galaxy">
-    <div class="grid gap-2 place-items-center">
+  <main class="min-h-svh py-5 bg-galaxy relative flex flex-col justify-center items-center">
+    <div class="grid gap-2 place-items-center bg-background px-5 py-3 text-foreground rounded">
       <WordDisplay
         v-for="(word, index) in guesses"
         :key="`${word}-${index}`"
@@ -11,10 +11,18 @@
     </div>
     <KeyBoard :handleSubmit="handleSubmit" />
 
+    <button
+      @click="resetGame"
+      class="absolute top-3 md:top-10 right-5 md:right-20 bg-heading px-2 py-1 rounded-md text-black"
+    >
+      reset game
+    </button>
+
+    <!-- game end modal -->
     <Modal
       :showCancel="false"
       :onConfirm="resetGame"
-      confirmText="play next"
+      confirmText="play again?"
       ref="modal"
       :allowClickOutside="false"
     >
@@ -27,19 +35,18 @@
 import KeyBoard from '@/components/KeyBoard.vue'
 import Modal from '@/components/ModalWrapper.vue'
 import WordDisplay from '@/components/WordDisplay.vue'
+import useModal from '@/composables/useModal'
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
 
 const store = useGameStore()
 
-const modal = ref<InstanceType<typeof Modal>>()
+const { modal, showModal } = useModal()
 
 const { submitGuess, resetGame } = store
 const { guesses, isDisabled, guessWord, statistics } = storeToRefs(store)
 const modalHtml = ref('<p>test</p>')
-
-const showModal = () => modal.value?.showModal()
 
 function handleSubmit() {
   // only submit when up to five characters
@@ -54,16 +61,14 @@ function handleSubmit() {
 
   if (!isWinner && gameEnd) {
     modalHtml.value = `
-    <h3 class="text-3xl mb-3">Level Failed</h3>
-    <p>The correct word is <strong class="text-purple-500 text-xl">${guessWord.value}</strong></p>
+    <h3 class="text-3xl mb-3">Game Over</h3>
+    <p>The correct word is <strong class="text-primary capitalize text-xl"> ${guessWord.value}</strong></p>
     `
     showModal()
   }
 }
 
 watch(statistics.value, () => {
-  console.log(statistics.value)
-
   localStorage.setItem('word-quest-game', JSON.stringify(statistics.value))
 })
 </script>
