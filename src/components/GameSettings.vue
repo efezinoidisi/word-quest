@@ -2,7 +2,7 @@
   <button @click="showModal" class="hover:border-b hover:border-cb transition-colors ease-linear">
     Settings
   </button>
-  <ModalWrapper ref="modal" :showConfirm="false" :showCancel="false">
+  <ModalWrapper ref="modal" :showConfirm="false" :showCancel="false" :onClose="handleButtonClick">
     <button @click="closeModal" class="group">
       <i
         class="pi pi-times text-2xl absolute top-3 right-2 group-hover:text-cb ease-linear transition-colors"
@@ -31,6 +31,10 @@ import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
 import ModalWrapper from './ModalWrapper.vue'
 import ToggleButton from './ToggleButton.vue'
+
+const { handleButtonClick } = defineProps<{
+  handleButtonClick: () => void
+}>()
 
 const store = useGameStore()
 

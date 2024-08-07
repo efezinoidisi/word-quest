@@ -3,7 +3,7 @@
     Statistics
   </button>
 
-  <ModalWrapper ref="modal" :showConfirm="false" :showCancel="false">
+  <ModalWrapper ref="modal" :showConfirm="false" :showCancel="false" :onClose="handleButtonClick">
     <button @click="closeModal" class="group">
       <i
         class="pi pi-times text-2xl absolute top-3 right-3 group-hover:text-cb transition-colors ease-linear"
@@ -48,6 +48,10 @@ import { getAverageGuesses } from '@/utils/utils'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
 import ModalWrapper from './ModalWrapper.vue'
+
+const { handleButtonClick } = defineProps<{
+  handleButtonClick: () => void
+}>()
 
 const { modal, showModal, closeModal } = useModal()
 const store = useGameStore()

@@ -1,5 +1,5 @@
 <template>
-  <dialog ref="modal" class="modal" :class="classes" @click="handleDialogClick">
+  <dialog ref="modal" class="modal" :class="classes" @click="handleDialogClick" @close="onClose">
     <div class="px-5 w-full h-full space-y-5 pb-5">
       <slot />
 
@@ -31,7 +31,7 @@ import { ref } from 'vue'
 
 const modal = ref<HTMLDialogElement>()
 
-const { confirmText, cancelText, showConfirm, showCancel, classes, allowClickOutside } =
+const { confirmText, cancelText, showConfirm, showCancel, classes, allowClickOutside, onClose } =
   withDefaults(
     defineProps<{
       confirmText?: string
@@ -40,13 +40,15 @@ const { confirmText, cancelText, showConfirm, showCancel, classes, allowClickOut
       showCancel?: boolean
       classes?: string
       allowClickOutside?: boolean
+      onClose?: () => void
     }>(),
     {
       cancelText: 'Cancel',
       confirmText: 'Confirm',
       showCancel: true,
       showConfirm: true,
-      allowClickOutside: true
+      allowClickOutside: true,
+      onClose: () => {}
     }
   )
 

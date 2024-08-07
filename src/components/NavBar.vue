@@ -15,8 +15,8 @@
         class="text-nowrap hover:border-b hover:border-cb transition-all ease-linear"
         >How to play</RouterLink
       >
-      <GameStats />
-      <GameSettings />
+      <GameStats :handleButtonClick="handleNavButtonClick" />
+      <GameSettings :handleButtonClick="handleNavButtonClick" />
     </nav>
     <ThemeToggle class="ml-auto md:ml-0" />
     <button
@@ -40,5 +40,13 @@ const isMenuVisible = ref(false)
 
 function toggleMenu() {
   isMenuVisible.value = !isMenuVisible.value
+}
+
+function handleNavButtonClick() {
+  if (!isMenuVisible.value) return
+
+  console.log('here')
+
+  toggleMenu()
 }
 </script>
