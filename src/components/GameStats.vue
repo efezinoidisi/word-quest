@@ -22,7 +22,7 @@
 
     <div class="flex justify-between items-center gap-3 text-xl mb-2 md:text-2xl">
       <p class="capitalize">percentage success</p>
-      <p>{{ percentageSuccess }}%</p>
+      <p>{{ percentageSuccess ? `${percentageSuccess}%` : 'no data' }}</p>
     </div>
 
     <div class="flex justify-between items-center gap-3 text-xl mb-2 md:text-2xl">
@@ -54,9 +54,10 @@ const store = useGameStore()
 
 const { statistics } = storeToRefs(store)
 
-const percentageSuccess = computed(() =>
-  Math.round((statistics.value.gamesWon / statistics.value.gamesPlayed) * 100)
-)
+const percentageSuccess = computed(() => {
+  if (statistics.value.gamesPlayed === 0) return 0
+  return Math.round((statistics.value.gamesWon / statistics.value.gamesPlayed) * 100)
+})
 
 const averageGuesses = computed(() => {
   const average = getAverageGuesses({
