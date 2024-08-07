@@ -1,20 +1,16 @@
 <template>
-  <main class="min-h-svh py-5 bg-galaxy relative flex flex-col justify-center items-center">
+  <main class="py-5 bg-galaxy relative flex flex-col justify-center items-center">
     <div class="grid gap-2 place-items-center bg-background px-5 py-3 text-foreground rounded">
       <WordDisplay
         v-for="(word, index) in guesses"
         :key="`${word}-${index}`"
         :word="word"
-        :size="5"
         :index="index"
       />
     </div>
     <KeyBoard :handleSubmit="handleSubmit" />
 
-    <button
-      @click="resetGame"
-      class="absolute top-3 md:top-10 right-5 md:right-20 bg-heading px-2 py-1 rounded-md text-black"
-    >
+    <button @click="resetGame" class="bg-foreground px-2 py-1 rounded-md text-background">
       reset game
     </button>
 

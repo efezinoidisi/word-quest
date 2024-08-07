@@ -1,16 +1,20 @@
 <template>
   <header
-    class="flex items-center gap-3 px-4 py-5 backdrop-blur sticky top-0 w-full shadow-md md:px-20 lg:px-section md:justify-between"
+    class="flex items-center gap-3 px-4 py-5 backdrop-blur sticky top-0 w-full shadow-md md:px-20 lg:px-section md:justify-between z-50"
   >
     <p class="text-2xl">
       <RouterLink to="/">WQ</RouterLink>
     </p>
     <nav
-      class="items-center inset-x-0 gap-3 bg-background w-full h-fit transition-all duration-500 ease-in-out animate-slide-in absolute top-full mt-2 md:static md:w-fit"
+      class="items-center inset-x-0 gap-3 bg-background w-full h-fit transition-all duration-500 ease-in-out animate-slide-in absolute top-full md:static md:w-fit md:bg-transparent md:animate-none py-5 md:py-0"
       id="menu"
-      :class="isMenuVisible ? 'flex flex-col' : 'hidden md:flex'"
+      :class="isMenuVisible ? 'flex flex-col md:flex-row' : 'hidden md:flex'"
     >
-      <RouterLink to="/#how-to-play" class="text-nowrap">How to play</RouterLink>
+      <RouterLink
+        to="/#how-to-play"
+        class="text-nowrap hover:border-b hover:border-cb transition-all ease-linear"
+        >How to play</RouterLink
+      >
       <GameStats />
       <GameSettings />
     </nav>

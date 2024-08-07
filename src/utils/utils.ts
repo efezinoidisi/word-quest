@@ -20,9 +20,23 @@ export function initValidation() {
   return Array(6)
     .fill(0)
     .map(() =>
-      new Array(5).fill({
+      new Array(6).fill({
         status: null,
         letter: null
       })
     )
+}
+
+export function getAverageGuesses({
+  guesses,
+  totalGames
+}: {
+  guesses: { [key: number]: number }
+  totalGames: number
+}) {
+  if (totalGames === 0) return 0
+
+  const totalGuesses = Object.entries(guesses).reduce((sum, [key, value]) => sum + +key * value, 0)
+
+  return (totalGuesses / totalGames).toFixed(2)
 }

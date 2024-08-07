@@ -15,8 +15,9 @@ app.use(router)
 app.use(createPinia())
 
 app.use(Vue3Toastify, {
-  autoClose: 4000,
-  limit: 1
+  autoClose: 2000,
+  limit: 2,
+  
 } as ToastContainerOptions)
 
 app.mount('#app')

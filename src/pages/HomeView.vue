@@ -10,7 +10,7 @@
         height="200"
       />
       <h2 class="text-5xl mb-8 font-bold leading-snug text-center text-balance max-w-2xl">
-        Get 6 chances to guess a 5-letter word
+        Get 6 chances to guess a 4-6 letter word
       </h2>
 
       <RouterLink
@@ -26,8 +26,7 @@
 
       <ul class="list-disc list-inside space-y-4 text-xl">
         <li>
-          Each guess must be a valid 5-letter word (currently limited to a fixed word list so not
-          all five letter words in the english language).
+          Each guess must be a valid word from a fixed wordlist. (There's limited four and six letter words)
         </li>
         <li>The color of the tiles will change to show how close your guess was to the word.</li>
       </ul>

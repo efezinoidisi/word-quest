@@ -1,10 +1,16 @@
 <template>
-  <button @click="showModal">Settings</button>
+  <button @click="showModal" class="hover:border-b hover:border-cb transition-colors ease-linear">
+    Settings
+  </button>
   <ModalWrapper ref="modal" :showConfirm="false" :showCancel="false">
-    <button @click="closeModal">
-      <i class="pi pi-times text-2xl absolute top-3 right-2"></i>
+    <button @click="closeModal" class="group">
+      <i
+        class="pi pi-times text-2xl absolute top-3 right-2 group-hover:text-cb ease-linear transition-colors"
+      ></i>
     </button>
-    <h3 class="text-center text-3xl font-semibold flex items-center gap-4">
+    <h3
+      class="text-center text-3xl font-semibold flex items-center gap-4 border-b-2 border-cb pb-3"
+    >
       <i class="pi pi-cog text-2xl"></i>
 
       <span>Settings</span>

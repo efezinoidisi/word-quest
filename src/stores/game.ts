@@ -112,7 +112,10 @@ export const useGameStore = defineStore('game', () => {
 
   function submitGuess(): { gameEnd: boolean; isWinner: boolean } {
     const guess = guesses.value[activeIndex.value]
-    if (!wordList.value.includes(guess)) {
+
+    const currentList = wordList.value.filter((word) => word.length === guessWord.value.length)
+
+    if (!currentList.includes(guess)) {
       toast.info(`not in word list`)
 
       return {
