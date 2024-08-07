@@ -1,13 +1,6 @@
 <template>
   <main class="py-5 bg-galaxy relative flex flex-col justify-center items-center">
-    <div class="grid gap-2 place-items-center bg-background px-5 py-3 text-foreground rounded">
-      <WordDisplay
-        v-for="(word, index) in guesses"
-        :key="`${word}-${index}`"
-        :word="word"
-        :index="index"
-      />
-    </div>
+    <DisplayBoard />
     <KeyBoard :handleSubmit="handleSubmit" />
 
     <button @click="resetGame" class="bg-foreground px-2 py-1 rounded-md text-background">
@@ -28,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
+import DisplayBoard from '@/components/DisplayBoard.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import Modal from '@/components/ModalWrapper.vue'
-import WordDisplay from '@/components/WordDisplay.vue'
 import useModal from '@/composables/useModal'
 import { useGameStore } from '@/stores/game'
 import { storeToRefs } from 'pinia'
@@ -41,7 +34,7 @@ const store = useGameStore()
 const { modal, showModal } = useModal()
 
 const { submitGuess, resetGame } = store
-const { guesses, isDisabled, guessWord, statistics } = storeToRefs(store)
+const { isDisabled, guessWord, statistics } = storeToRefs(store)
 const modalHtml = ref('<p>test</p>')
 
 function handleSubmit() {

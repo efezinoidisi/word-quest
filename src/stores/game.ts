@@ -178,17 +178,15 @@ export const useGameStore = defineStore('game', () => {
     return guesses.value[activeIndex.value].length < wordLength.value
   })
 
-  function getWords() {
-    fetch('/words.txt')
-      .then((res) => res.text())
-      .then((data) => {
-        const words = data.split('\n')
-        wordList.value = words
+  async function getWords() {
+    const res = await fetch('/words.txt')
+    const data = await res.text()
+    const words = data.split('\n')
+    wordList.value = words
 
-        const word = getRandomWord(words)
+    const word = getRandomWord(words)
 
-        guessWord.value = word
-      })
+    guessWord.value = word
   }
 
   function resetGame() {
@@ -202,8 +200,6 @@ export const useGameStore = defineStore('game', () => {
     isGameEnd.value = false
   }
 
-  getWords()
-
   return {
     handleChange,
     resetGame,
@@ -215,6 +211,7 @@ export const useGameStore = defineStore('game', () => {
     guessWord,
     isGameEnd,
     isHardMode,
-    statistics
+    statistics,
+    getWords
   }
 })

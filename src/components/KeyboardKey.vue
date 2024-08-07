@@ -21,7 +21,6 @@ const { validationResults } = storeToRefs(store)
 
 const { keyLabel } = defineProps<{
   keyLabel: string
-  isDisabled: boolean
 }>()
 
 const emit = defineEmits<{

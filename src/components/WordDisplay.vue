@@ -9,6 +9,7 @@
           ? getBackgroundColor(validationResults[index][slotIndex].status)
           : 'bg-kbd'
       "
+      data-testid="word-display"
     >
       <span>{{ word[slotIndex] }}</span>
     </p>
