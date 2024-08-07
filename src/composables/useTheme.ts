@@ -1,5 +1,5 @@
 import type { Theme } from '@/types/theme'
-import { readonly, ref } from 'vue'
+import { onMounted, readonly, ref } from 'vue'
 
 const storageKey = 'word-quest-theme'
 
@@ -14,6 +14,10 @@ export default function useTheme() {
     document.body.classList.add(theme.value)
     localStorage.setItem(storageKey, theme.value)
   }
+
+  onMounted(() => {
+    document.body.classList.add(theme.value)
+  })
 
   return {
     theme: readonly(theme),
