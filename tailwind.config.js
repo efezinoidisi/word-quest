@@ -29,7 +29,8 @@ export default {
       },
       backgroundImage: {
         art: 'url("/src/assets/bg.jpg")',
-        galaxy: 'url("/src/assets/galaxy.jpg")'
+        galaxy: 'url("/src/assets/galaxy.jpg")',
+        light: 'url("/src/assets/light.jpg")'
       },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif']

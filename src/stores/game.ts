@@ -108,6 +108,8 @@ export const useGameStore = defineStore('game', () => {
     statistics.value.gamesPlayed += 1
     const size = guesses.value.filter((guess) => guess).length
     statistics.value.guesses[size] += 1
+
+    localStorage.setItem(storageKey, JSON.stringify(statistics.value))
   }
 
   function submitGuess(): { gameEnd: boolean; isWinner: boolean } {
@@ -181,10 +183,9 @@ export const useGameStore = defineStore('game', () => {
   async function getWords() {
     const res = await fetch('/words.txt')
     const data = await res.text()
-    const words = data.split('\n')
-    wordList.value = words
+    wordList.value = data.split('\n')
 
-    const word = getRandomWord(words)
+    const word = getRandomWord(wordList.value)
 
     guessWord.value = word
   }

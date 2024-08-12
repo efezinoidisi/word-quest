@@ -1,11 +1,18 @@
 <template>
-  <main class="py-5 bg-galaxy relative flex flex-col justify-center items-center">
-    <DisplayBoard />
-    <KeyBoard :handleSubmit="handleSubmit" />
-
-    <button @click="resetGame" class="bg-foreground px-2 py-1 rounded-md text-background">
-      reset game
-    </button>
+  <main
+    class="py-5 relative flex flex-col justify-center items-center min-h-lvh bg-center bg-cover"
+    :class="bgImage"
+  >
+    <div class="w-fit grid place-items-center gap-y-2 mx-auto">
+      <DisplayBoard />
+      <button
+        @click="resetGame"
+        class="bg-foreground px-2 py-1 rounded-md text-background block ml-auto"
+      >
+        Reset game
+      </button>
+      <KeyBoard :handleSubmit="handleSubmit" />
+    </div>
 
     <!-- game end modal -->
     <Modal
@@ -25,17 +32,27 @@ import DisplayBoard from '@/components/DisplayBoard.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import Modal from '@/components/ModalWrapper.vue'
 import useModal from '@/composables/useModal'
+import useTheme from '@/composables/useTheme'
 import { useGameStore } from '@/stores/game'
+import { getThemePreference } from '@/utils/utils'
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 const store = useGameStore()
 
 const { modal, showModal } = useModal()
 
+const { theme } = useTheme()
+
+const bgImage = computed(() => {
+  const value = theme.value === 'system' ? getThemePreference() : theme.value
+
+  return value === 'light' ? 'bg-light' : 'bg-galaxy'
+})
+
 const { submitGuess, resetGame } = store
-const { isDisabled, guessWord, statistics } = storeToRefs(store)
-const modalHtml = ref('<p>test</p>')
+const { isDisabled, guessWord } = storeToRefs(store)
+const modalHtml = ref('')
 
 function handleSubmit() {
   // only submit when up to five characters
@@ -56,9 +73,5 @@ function handleSubmit() {
     showModal()
   }
 }
-
-watch(statistics.value, () => {
-  localStorage.setItem('word-quest-game', JSON.stringify(statistics.value))
-})
 </script>
 <style scoped></style>

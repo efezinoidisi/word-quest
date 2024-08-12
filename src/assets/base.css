@@ -7,9 +7,6 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: 244 237 228;
-  --color-foreground: 16 12 8;
-
   --color-border: 255 148 8;
   --color-border-hover: 149 18 44;
 
@@ -18,12 +15,6 @@
 
   --color-primary: #fd2282;
   --section-gap: 10rem;
-
-  --modal-background: 235 236 240;
-  --modal-text: 11 23 61;
-
-  --color-kbd: #dfe2e4;
-  --color-theme-btn-bg: 219 224 225;
 }
 
 .dark {
@@ -44,19 +35,6 @@
   --modal-text: 11 23 61;
   --color-kbd: #dfe2e4;
   --color-theme-btn-bg: 219 224 225;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: 20 32 48;
-    --color-foreground: 243 244 245;
-
-    --modal-background: 11 23 61;
-    --modal-text: 205 214 238;
-
-    --color-kbd: #193950;
-    --color-theme-btn-bg: 31 41 55;
-  }
 }
 
 body {

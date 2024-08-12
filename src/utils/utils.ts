@@ -40,3 +40,13 @@ export function getAverageGuesses({
 
   return (totalGuesses / totalGames).toFixed(2)
 }
+
+export function getThemePreference() {
+  const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+  if (isDarkMode) {
+    return 'dark'
+  }
+
+  return 'light'
+}

@@ -1,22 +1,28 @@
 import type { Theme } from '@/types/theme'
+import { getThemePreference } from '@/utils/utils'
 import { onMounted, readonly, ref } from 'vue'
 
 const storageKey = 'word-quest-theme'
 
-const defaultTheme = (localStorage.getItem(storageKey) as Theme) ?? 'system'
+const defaultTheme = (localStorage.getItem(storageKey) as Theme) ?? getThemePreference()
 const theme = ref<Theme>(defaultTheme)
 
 export default function useTheme() {
   const toggleTheme = (newTheme: Theme) => {
     if (newTheme === theme.value) return
-    document.body.classList.remove(theme.value)
+
+    // remove previous theme
+    document.body.classList.remove(theme.value === 'system' ? getThemePreference() : theme.value)
+
     theme.value = newTheme
-    document.body.classList.add(theme.value)
+    // add new theme
+    document.body.classList.add(theme.value === 'system' ? getThemePreference() : theme.value)
+
     localStorage.setItem(storageKey, theme.value)
   }
 
   onMounted(() => {
-    document.body.classList.add(theme.value)
+    document.body.classList.add(theme.value === 'system' ? getThemePreference() : theme.value)
   })
 
   return {
