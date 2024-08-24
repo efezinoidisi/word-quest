@@ -13,6 +13,7 @@
       <RouterLink
         to="/#how-to-play"
         class="text-nowrap hover:border-b hover:border-cb transition-all ease-linear"
+        @click="handleNavButtonClick"
         >How to play</RouterLink
       >
       <GameStats :handleButtonClick="handleNavButtonClick" />
@@ -44,9 +45,6 @@ function toggleMenu() {
 
 function handleNavButtonClick() {
   if (!isMenuVisible.value) return
-
-  console.log('here')
-
   toggleMenu()
 }
 </script>
