@@ -32,8 +32,17 @@ const handleClick = () => {
 }
 
 const backgroundColor = computed(() => {
-  const key = validationResults.value.flat(2).find((item) => item.letter === keyLabel)
+  let color = 'bg-white'
+  let status: number
 
-  return key ? getBackgroundColor(key.status) : 'bg-white'
+  validationResults.value.flat(2).forEach((result) => {
+    if (result.letter !== keyLabel) return
+    // is correct
+    if (status === 0) return
+    status = result.status
+    color = getBackgroundColor(status)
+  })
+
+  return color
 })
 </script>

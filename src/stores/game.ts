@@ -68,16 +68,15 @@ export const useGameStore = defineStore('game', () => {
     guess.split('').forEach((letter, index) => {
       const result = {
         letter,
-        status: 0
+        status: -1
       }
       if (letter === guessWord.value[index]) {
+        result.status = 0
         validationResults.value[activeIndex.value][index] = result
       } else if (guessWord.value.split('').includes(letter)) {
         result.status = 1
         validationResults.value[activeIndex.value][index] = result
       } else {
-        result.status = -1
-
         validationResults.value[activeIndex.value][index] = result
       }
     })
