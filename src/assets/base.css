@@ -1,47 +1,61 @@
 /* color palette from <https://github.com/vuejs/theme> */
 @import 'vue3-toastify/dist/index.css';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-/* semantic color variables for this project */
-:root {
-  --color-border: 255 148 8;
-  --color-border-hover: 149 18 44;
-
+@theme {
+  --color-cb: 255 148 8;
+  --color-cbh: 149 18 44;
   --color-heading: 202 63 22;
   --color-secondary: 219 224 225;
-
   --color-primary: #fd2282;
-  --section-gap: 10rem;
+  --color-background: 244 237 228;
+  --color-foreground: 16 12 8;
+  --color-modal-bg: 235 236 240;
+  --color-modal-text: 11 23 61;
+  --color-kbd: #dfe2e4;
+  --color-theme-btn: 219 224 225;
+
+  --spacing-section: 10rem;
+
+  --background-image-art: url("/src/assets/bg.jpg");
+  --background-image-galaxy: url("/src/assets/galaxy.jpg");
+  --background-image-light: url("/src/assets/light.jpg");
+
+  --animate-slide-in: slide-in 900ms cubic-bezier(0.39, 0.575, 0.565, 1);
+
+  --font-roboto: "Roboto", sans-serif;
+
+  @keyframes slide-in {
+    from {
+      translate: 0 -50%;
+      opacity: 0;
+    }
+    to {
+      translate: 0;
+      opacity: 1;
+    }
+  }
 }
+
+@variant dark (&:where(.dark, .dark *));
 
 .dark {
   --color-background: 20 32 48;
   --color-foreground: 243 244 245;
-
-  --modal-background: 11 23 60;
-  --modal-text: 205 214 238;
+  --color-modal-bg: 11 23 60;
+  --color-modal-text: 205 214 238;
   --color-kbd: #193950;
-  --color-theme-btn-bg: 31 41 55;
+  --color-theme-btn: 31 41 55;
 }
 
-.light {
-  --color-background: 244 237 228;
-  --color-foreground: 16 12 8;
-
-  --modal-background: 235 236 240;
-  --modal-text: 11 23 61;
-  --color-kbd: #dfe2e4;
-  --color-theme-btn-bg: 219 224 225;
-}
+/* semantic color variables for this project */
 
 body {
   color: rgb(var(--color-foreground));
   background-color: rgb(var(--color-background));
   line-height: 1.6;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-roboto);
   font-size: 1rem;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -53,13 +67,14 @@ body {
 }
 
 .modal {
-  top: 20%;
+  inset: 0;
+  margin: auto;
   width: 90%;
   max-width: 26rem;
   border: none;
   border-radius: 10px;
-  background-color: rgb(var(--modal-background));
-  color: rgb(var(--modal-text));
+  background-color: rgb(var(--color-modal-bg));
+  color: rgb(var(--color-modal-text));
 }
 
 dialog {
@@ -90,7 +105,6 @@ dialog {
   dialog:where([open]) {
     --opacity: 0;
     scale: 0.5;
-    left: 10rem;
   }
 
   dialog:where([open])::backdrop {
